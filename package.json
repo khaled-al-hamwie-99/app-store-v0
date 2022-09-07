@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/app.js -e js,json"
+    "start": "nodemon src/app.js -e js,json",
+    "populate": "node populate.js"
   },
   "keywords": [],
   "author": "",
