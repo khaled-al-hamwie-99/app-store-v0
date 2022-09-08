@@ -1,7 +1,8 @@
 const Product = require('../models/product')
 
 const createProduct = async (req, res) => {
-    res.send('your products are')
+    const product = await Product.create(req.body)
+    res.status(201).json(product)
 }
 
 const getProducts = async (req, res) => {
@@ -56,7 +57,32 @@ const getProducts = async (req, res) => {
     const products = await result
     res.json({ nproduct: products.length, products })
 }
+
+const getProductById = async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (!product)
+        return res.status(404).json({ error: `the id ${req.params.id} doesn't exist` })
+    res.json(product)
+}
+const updateProduct = async (req, res) => {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+    })
+    if (!product)
+        return res.status(404).json({ error: `the id ${req.params.id} doesn't exist` })
+    res.json(product)
+}
+const deleteProduct = async (req, res) => {
+    const product = await Product.findByIdAndDelete(req.params.id)
+    if (!product)
+        return res.status(404).json({ error: "not found" })
+    res.json(product)
+}
 module.exports = {
     createProduct,
     getProducts,
+    getProductById,
+    updateProduct,
+    deleteProduct
 }

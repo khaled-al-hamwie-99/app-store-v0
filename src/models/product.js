@@ -9,6 +9,7 @@ const ProductScema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, "product priece must be provided"],
+        min: 0
     },
     featured: {
         type: Boolean,
@@ -16,7 +17,9 @@ const ProductScema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        default: 4.5
+        default: 4.5,
+        max: 5,
+        min: 0,
     },
     createdAt: {
         type: Date,
@@ -24,6 +27,7 @@ const ProductScema = new mongoose.Schema({
     },
     company: {
         type: String,
+        required: [true, "you must provide a company name"],
         enum: {
             values: ['ikea', 'liddy', 'marcos', 'caressa'],
             message: "{VALUE} is not supported"
