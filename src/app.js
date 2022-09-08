@@ -25,7 +25,7 @@ app.use(errorMiddleware)
 const start = async () => {
     try {
         // console.clear()
-        await connect(process.env.LOCAL_URL)
+        await connect(process.env.MONGODB_URL)
         app.listen(port, () => {
             console.log(`SERVER is listening on port : ${port}`)
         })
